@@ -3,6 +3,7 @@
 const Jasmine = require("jasmine");
 /* tslint:enable: no-require-imports */
 /* tslint:enable:no-var-requires */
+import "reflect-metadata";
 
 const jsm = new Jasmine({}) as any;
 jsm.configureDefaultReporter({

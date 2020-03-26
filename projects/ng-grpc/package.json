@@ -24,9 +24,15 @@
     "url": "https://github.com/dvabuzyarov/ng-grpc/issues"
   },
   "peerDependencies": {
-    "@angular/core": "^9.1.0"
+    "@angular/core": "^9.1.0",
+    "grpc-web": "^1.0.7",
+    "rxjs": "^6.5.4",
+    "google-protobuf": "^3.11.4",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "jasmine": "3.5.0"
+    "jasmine": "3.5.0",
+    "moq.ts": "^5.0.5",
+    "ng-auto-moq": "^3.1.0"
   }
 }

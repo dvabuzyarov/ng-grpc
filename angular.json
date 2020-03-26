@@ -42,9 +42,10 @@
           }
         }
       }
-    }},
+    }
+  },
   "cli": {
-    "analytics": false
+    "analytics": true
   },
   "defaultProject": "ng-grpc"
 }
