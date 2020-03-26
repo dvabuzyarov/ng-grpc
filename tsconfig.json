@@ -22,6 +22,10 @@
       "ng-grpc": [
         "dist/ng-grpc/ng-grpc",
         "dist/ng-grpc"
+      ],
+      "protoc-gen": [
+        "dist/protoc-gen/protoc-gen",
+        "dist/protoc-gen"
       ]
     }
   },

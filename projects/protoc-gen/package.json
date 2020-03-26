@@ -1,10 +1,10 @@
 {
-  "name": "ng-grpc",
+  "name": "protoc-gen",
   "version": "0.0.0-semantically-released",
   "author": "dvabuzyarov(at)gmail.com",
   "license": "MIT",
   "readme": "README.md",
-  "description": "Angular gRPC framework",
+  "description": "Angular gRPC framework protoc generator",
   "publishConfig": {
     "access": "public",
     "tag": "next"
@@ -27,12 +27,17 @@
     "@angular/core": "^9.1.0",
     "grpc-web": "^1.0.7",
     "rxjs": "^6.5.4",
-    "google-protobuf": "^3.11.4"
+    "google-protobuf": "^3.11.4",
+    "protoc-plugin": "^0.0.6",
+    "winston": "3.2.1",
+    "ng-grpc": "",
+    "prettier": "^2.0.2"
   },
   "devDependencies": {
     "jasmine": "3.5.0",
     "moq.ts": "^5.0.5",
     "ng-auto-moq": "^3.1.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "@types/node": "^12.12.30"
   }
 }
