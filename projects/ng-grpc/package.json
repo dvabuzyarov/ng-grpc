@@ -1,0 +1,32 @@
+{
+  "name": "ng-grpc",
+  "version": "0.0.0-semantically-released",
+  "author": "dvabuzyarov(at)gmail.com",
+  "license": "MIT",
+  "readme": "README.md",
+  "description": "Angular gRPC framework",
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dvabuzyarov/ng-grpc"
+  },
+  "keywords": [
+    "angular",
+    "injector",
+    "moq.ts",
+    "auto",
+    "test"
+  ],
+  "bugs": {
+    "url": "https://github.com/dvabuzyarov/ng-grpc/issues"
+  },
+  "peerDependencies": {
+    "@angular/core": "^9.1.0"
+  },
+  "devDependencies": {
+    "jasmine": "3.5.0"
+  }
+}
