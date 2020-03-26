@@ -53,7 +53,7 @@
     "prettier": "2.0.2"
   },
   "release": {
-    "pkgRoot": "dist"
+    "pkgRoot": ["dist/ng-grpc", "dist/protoc-gen"]
   },
   "config": {
     "commitizen": {
