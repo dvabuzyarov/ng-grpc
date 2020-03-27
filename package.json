@@ -50,9 +50,16 @@
     "reflect-metadata": "0.1.13",
     "protoc-plugin": "0.0.6",
     "winston": "3.2.1",
-    "prettier": "2.0.2"
+    "prettier": "2.0.2",
+    "@dvabuzyarov/npm": "7.1.0"
   },
   "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer", 
+      "@semantic-release/release-notes-generator", 
+      "@dvabuzyarov/npm", 
+      "@semantic-release/github"
+    ],
     "pkgRoot": ["dist/ng-grpc", "dist/protoc-gen"]
   },
   "config": {
@@ -70,8 +77,5 @@
       "pre-commit": "npm run lint && npm run test",
       "commit-msg": "commitlint --edit"
     }
-  },
-  "dependencies": {
-    "tslib": "^1.10.0"
   }
 }
