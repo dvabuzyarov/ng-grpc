@@ -13,7 +13,7 @@ import { PbwscFile } from "./output/files/pbwsc-file";
 import { Printer } from "./output/misc/printer";
 import { Services } from "./services";
 
-export function main() {
+function main() {
     CodeGeneratorRequest()
         .then(r => {
             const protocInput = r.toObject();
