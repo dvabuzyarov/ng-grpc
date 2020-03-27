@@ -51,7 +51,7 @@
     "protoc-plugin": "0.0.6",
     "winston": "3.2.1",
     "prettier": "2.0.2",
-    "@dvabuzyarov/npm": "7.1.0"
+    "@dvabuzyarov/npm": "7.1.1"
   },
   "release": {
     "plugins": [
