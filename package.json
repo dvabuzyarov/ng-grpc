@@ -55,12 +55,15 @@
   },
   "release": {
     "plugins": [
-      "@semantic-release/commit-analyzer", 
-      "@semantic-release/release-notes-generator", 
-      "@dvabuzyarov/npm", 
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@dvabuzyarov/npm",
       "@semantic-release/github"
     ],
-    "pkgRoot": ["dist/ng-grpc", "dist/protoc-gen"]
+    "pkgRoot": [
+      "dist/ng-grpc",
+      "dist/protoc-gen"
+    ]
   },
   "config": {
     "commitizen": {
