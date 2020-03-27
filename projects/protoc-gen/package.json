@@ -10,7 +10,7 @@
     "tag": "next"
   },
   "bin": {
-    "ng-grpc-protoc-gen": "./dist/esm5/lib/main.js"
+    "ng-grpc-protoc-gen": "./esm5/lib/main.js"
   },
   "repository": {
     "type": "git",
