@@ -1,5 +1,5 @@
 {
-  "name": "ng-grpc",
+  "name": "@ng-grpc/core",
   "version": "0.0.0-semantically-released",
   "author": "dvabuzyarov(at)gmail.com",
   "license": "MIT",
