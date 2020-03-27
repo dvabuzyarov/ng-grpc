@@ -16,21 +16,21 @@ const angularCore = {
 };
 
 const ngxGrpcCommon = {
-    GrpcCallType: new Dependency("ng-grpc", "GrpcCallType"),
-    GrpcClient: new Dependency("ng-grpc", "GrpcClient"),
-    GrpcClientFactory: new Dependency("ng-grpc", "GrpcClientFactory"),
-    GrpcClientSettings: new Dependency("ng-grpc", "GrpcClientSettings"),
-    GrpcClientDefaultSettings: new Dependency("ng-grpc", "GRPC_SERVICE_DEFAULT_SETTINGS"),
-    GrpcMessage: new Dependency("ng-grpc", "GrpcMessage"),
-    RecursivePartial: new Dependency("ng-grpc", "RecursivePartial"),
-    GrpcEvent: new Dependency("ng-grpc", "GrpcEvent"),
+    GrpcCallType: new Dependency("@ng-grpc/core", "GrpcCallType"),
+    GrpcClient: new Dependency("@ng-grpc/core", "GrpcClient"),
+    GrpcClientFactory: new Dependency("@ng-grpc/core", "GrpcClientFactory"),
+    GrpcClientSettings: new Dependency("@ng-grpc/core", "GrpcClientSettings"),
+    GrpcClientDefaultSettings: new Dependency("@ng-grpc/core", "GRPC_SERVICE_DEFAULT_SETTINGS"),
+    GrpcMessage: new Dependency("@ng-grpc/core", "GrpcMessage"),
+    RecursivePartial: new Dependency("@ng-grpc/core", "RecursivePartial"),
+    GrpcEvent: new Dependency("@ng-grpc/core", "GrpcEvent"),
 };
 
 const ngxGrpcCore = {
-    GrpcHandler: new Dependency("ng-grpc", "GrpcHandler"),
-    takeMessages: new Dependency("ng-grpc", "takeMessages"),
-    throwStatusErrors: new Dependency("ng-grpc", "throwStatusErrors"),
-    GRPC_CLIENT_FACTORY: new Dependency("ng-grpc", "GRPC_CLIENT_FACTORY"),
+    GrpcHandler: new Dependency("@ng-grpc/core", "GrpcHandler"),
+    takeMessages: new Dependency("@ng-grpc/core", "takeMessages"),
+    throwStatusErrors: new Dependency("@ng-grpc/core", "throwStatusErrors"),
+    GRPC_CLIENT_FACTORY: new Dependency("@ng-grpc/core", "GRPC_CLIENT_FACTORY"),
 };
 
 const ngxGrpcWorker = {
