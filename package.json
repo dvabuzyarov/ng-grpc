@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ng-grpc --prod && ng build protoc-gen --prod && cpx README.md ./dist/ng-grpc/ && cpx README.md ./dist/protoc-gen/",
+    "build": "ng build ng-grpc --prod && ng build protoc-gen --prod && npm run copy:readme && add-shebang",
+    "copy:readme": "cpx README.md ./dist/ng-grpc/ && cpx README.md ./dist/protoc-gen/",
     "build-tests": "tsc -p ./projects/ng-grpc/tsconfig.spec.json && tsc -p ./projects/protoc-gen/tsconfig.spec.json",
     "test": "npm run build-tests && node ./out-tsc/**/test.js",
     "lint": "ng lint",
@@ -12,6 +13,9 @@
     "commit": "git-cz",
     "commit-retry": "git cz --retry",
     "semantic-release": "semantic-release"
+  },
+  "bin": {
+    "ng-grpc-protoc-gen": "./dist/protoc-gen/bundles/ng-grpc-protoc-gen.umd.js"
   },
   "private": true,
   "devDependencies": {
@@ -51,7 +55,8 @@
     "protoc-plugin": "0.0.6",
     "winston": "3.2.1",
     "prettier": "2.0.2",
-    "@dvabuzyarov/npm": "7.1.3"
+    "@dvabuzyarov/npm": "7.1.3",
+    "add-shebang": "0.1.0"
   },
   "release": {
     "plugins": [

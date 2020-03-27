@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 import { CodeGeneratorRequest, CodeGeneratorResponse, CodeGeneratorResponseError } from "protoc-plugin";
@@ -13,7 +11,7 @@ import { PbwscFile } from "./output/files/pbwsc-file";
 import { Printer } from "./output/misc/printer";
 import { Services } from "./services";
 
-function main() {
+export function main() {
     CodeGeneratorRequest()
         .then(r => {
             const protocInput = r.toObject();
