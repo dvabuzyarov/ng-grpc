@@ -45,10 +45,10 @@ export class ServiceClient {
           @Inject(GRPC_CLIENT_FACTORY) clientFactory: GrpcClientFactory,
           private handler: GrpcHandler,
         ) {
-          if (defaultSettings === undefined && clientSettings === undefined) {
+          if (defaultSettings === null && clientSettings === null) {
             throw new Error('Either GRPC_SERVICE_DEFAULT_SETTINGS or ${tokenName} or both should be provided');
           }
-          const settings = {...({} || defaultSettings), ...({} || clientSettings)} as GrpcClientSettings;
+          const settings = {...(defaultSettings || {}), ...(clientSettings || {})} as GrpcClientSettings;
           this.client = clientFactory.createClient('${serviceId}', settings);
         }
     `);
