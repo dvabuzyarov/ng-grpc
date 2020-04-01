@@ -27,7 +27,7 @@ export class ServiceClientMethod {
 
         const serviceUrlPrefix = this.proto.pb_package ? this.proto.pb_package + "." : "";
         const inputType = this.proto.getRelativeTypeName(this.serviceMethod.inputType, "thisProto");
-        const outputType = this.proto.getRelativeTypeName(this.serviceMethod.outputType, "thisProto");
+        const outputType = this.proto.getRelativeTypeName(`I${this.serviceMethod.outputType}`, "thisProto");
 
         const jsdocMessagesOnly = new JSDoc();
 
@@ -48,7 +48,7 @@ export class ServiceClientMethod {
         printer.add(`
       ${jsdocMessagesOnly.toString()}
       ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<${outputType}> {
-        return this.${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessages());
+        return this.${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessagesJSON());
       }
 
       ${jsdocEvents.toString()}

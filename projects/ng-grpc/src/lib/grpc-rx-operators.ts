@@ -25,3 +25,15 @@ export function takeMessages<T extends GrpcMessage<TMessage>, TMessage>() {
         map((event: GrpcDataEvent<T, TMessage>) => event.data),
     );
 }
+
+/**
+ * RxJS operator
+ * When applied to gRPC events stream emits only messages toJSON objects
+ * @return Observable of messages
+ */
+export function takeMessagesJSON<T extends GrpcMessage<TMessage>, TMessage>() {
+    return (source$: Observable<GrpcEvent<T, TMessage>>) => source$.pipe(
+        filter(event => event instanceof GrpcDataEvent),
+        map((event: GrpcDataEvent<T, TMessage>) => event.data.toJSON()),
+    );
+}
