@@ -29,6 +29,7 @@ const ngxGrpcCommon = {
 const ngxGrpcCore = {
     GrpcHandler: new Dependency("@ng-grpc/core", "GrpcHandler"),
     takeMessages: new Dependency("@ng-grpc/core", "takeMessages"),
+    takeMessagesJSON: new Dependency("@ng-grpc/core", "takeMessagesJSON"),
     throwStatusErrors: new Dependency("@ng-grpc/core", "throwStatusErrors"),
     GRPC_CLIENT_FACTORY: new Dependency("@ng-grpc/core", "GRPC_CLIENT_FACTORY"),
 };

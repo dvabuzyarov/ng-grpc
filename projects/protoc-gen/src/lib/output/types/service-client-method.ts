@@ -21,7 +21,7 @@ export class ServiceClientMethod {
             ExternalDependencies.GrpcEvent,
             ExternalDependencies.Metadata,
             ExternalDependencies.Observable,
-            ExternalDependencies.takeMessages,
+            ExternalDependencies.takeMessagesJSON,
             ExternalDependencies.throwStatusErrors,
         );
 
