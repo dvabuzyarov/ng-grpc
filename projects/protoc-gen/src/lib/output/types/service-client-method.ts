@@ -28,7 +28,7 @@ export class ServiceClientMethod {
         const serviceUrlPrefix = this.proto.pb_package ? this.proto.pb_package + "." : "";
         const inputType = this.proto.getRelativeTypeName(this.serviceMethod.inputType, "thisProto");
         const outputType = this.proto.getRelativeTypeName(this.serviceMethod.outputType, "thisProto");
-        const messageOutputType = this.proto.getRelativeTypeName(this.getInterfaceNotation(this.serviceMethod.outputType), "thisProto");
+        const messageOutputType = this.getInterfaceNotation(this.proto.getRelativeTypeName(this.serviceMethod.outputType, "thisProto"));
 
         const jsdocMessagesOnly = new JSDoc();
 
