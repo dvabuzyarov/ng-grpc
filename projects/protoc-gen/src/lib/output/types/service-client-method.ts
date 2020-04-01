@@ -27,14 +27,15 @@ export class ServiceClientMethod {
 
         const serviceUrlPrefix = this.proto.pb_package ? this.proto.pb_package + "." : "";
         const inputType = this.proto.getRelativeTypeName(this.serviceMethod.inputType, "thisProto");
-        const outputType = this.proto.getRelativeTypeName(`I${this.serviceMethod.outputType}`, "thisProto");
+        const outputType = this.proto.getRelativeTypeName(this.serviceMethod.outputType, "thisProto");
+        const messageOutputType = this.proto.getRelativeTypeName(this.getInterfaceNotation(this.serviceMethod.outputType), "thisProto");
 
         const jsdocMessagesOnly = new JSDoc();
 
         jsdocMessagesOnly.setDescription(`${this.serviceMethod.serverStreaming ? "Server streaming" : "Unary"} RPC. Emits messages and throws errors on non-zero status codes`);
         jsdocMessagesOnly.addParam({type: inputType, name: "request", description: "Request message"});
         jsdocMessagesOnly.addParam({type: "Metadata", name: "metadata", description: "Additional data"});
-        jsdocMessagesOnly.setReturn(`Observable<${outputType}>`);
+        jsdocMessagesOnly.setReturn(`Observable<${messageOutputType}>`);
         jsdocMessagesOnly.setDeprecation(!!this.serviceMethod.options && this.serviceMethod.options.deprecated);
 
         const jsdocEvents = new JSDoc();
@@ -47,7 +48,7 @@ export class ServiceClientMethod {
 
         printer.add(`
       ${jsdocMessagesOnly.toString()}
-      ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<${outputType}> {
+      ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<${messageOutputType}> {
         return this.${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessagesJSON());
       }
 
@@ -66,4 +67,11 @@ export class ServiceClientMethod {
     `);
     }
 
+    private getInterfaceNotation(typeName: string) {
+        const lastDotIndex = typeName.lastIndexOf(".");
+        if (lastDotIndex > -1) {
+            return `${typeName.slice(0, lastDotIndex + 1)}I${typeName.slice(lastDotIndex + 1)}`;
+        }
+        return `I${typeName}`;
+    }
 }
