@@ -197,7 +197,7 @@ export class Message {
         });
 
         printer.addLine(jsdoc.toString());
-        printer.addLine(`constructor(value?: RecursivePartial<${this.message.name}>) {`);
+        printer.addLine(`constructor(value?: I${this.message.name}) {`);
         printer.addLine("value = value || {};");
 
         this.messageFields.forEach(f => {
