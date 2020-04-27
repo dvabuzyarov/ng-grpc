@@ -31,9 +31,9 @@
     "grpc-web": "^1.0.7",
     "rxjs": "^6.5.4",
     "google-protobuf": "^3.11.4",
-    "protoc-plugin": "^0.0.6",
-    "winston": "3.2.1",
     "ng-grpc": "",
+    "winston": "3.2.1",
+    "protoc-plugin": "^0.0.6",
     "prettier": "^2.0.2"
   },
   "devDependencies": {
