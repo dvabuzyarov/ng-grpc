@@ -21,8 +21,6 @@ export class ServiceClientMethod {
             ExternalDependencies.GrpcEvent,
             ExternalDependencies.Metadata,
             ExternalDependencies.Observable,
-            ExternalDependencies.takeMessagesJSON,
-            ExternalDependencies.throwStatusErrors,
         );
 
         const serviceUrlPrefix = this.proto.pb_package ? this.proto.pb_package + "." : "";
@@ -49,7 +47,7 @@ export class ServiceClientMethod {
         printer.add(`
       ${jsdocMessagesOnly.toString()}
       ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<${messageOutputType}> {
-        return this.${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData, requestMetadata).pipe(throwStatusErrors(), takeMessagesJSON());
+        return this.${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData, requestMetadata);
       }
 
       ${jsdocEvents.toString()}
