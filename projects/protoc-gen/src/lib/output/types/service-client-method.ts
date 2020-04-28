@@ -46,12 +46,12 @@ export class ServiceClientMethod {
 
         printer.add(`
       ${jsdocMessagesOnly.toString()}
-      ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<GrpcEvent<${outputType}>> {
+      ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<${messageOutputType}> {
         return this.${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData, requestMetadata);
       }
 
       ${jsdocEvents.toString()}
-      ${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<GrpcEvent<${outputType}>> {
+      ${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<GrpcEvent<${outputType}>|${messageOutputType}> {
         return this.handler.handle({
           type: GrpcCallType.${this.serviceMethod.serverStreaming ? "serverStream" : "unary"},
           client: this.client,
