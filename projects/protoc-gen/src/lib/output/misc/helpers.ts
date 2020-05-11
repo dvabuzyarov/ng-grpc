@@ -55,7 +55,6 @@ export function getDataType(proto: Proto, field: ProtoMessageField, useInterface
     switch (field.type) {
         case ProtoMessageFieldType.string:
         case ProtoMessageFieldType.fixed64:
-        case ProtoMessageFieldType.int64:
         case ProtoMessageFieldType.sfixed64:
         case ProtoMessageFieldType.sint64:
         case ProtoMessageFieldType.uint64:
@@ -71,6 +70,7 @@ export function getDataType(proto: Proto, field: ProtoMessageField, useInterface
         case ProtoMessageFieldType.sfixed32:
         case ProtoMessageFieldType.sint32:
         case ProtoMessageFieldType.uint32:
+        case ProtoMessageFieldType.int64:
             return "number" + suffix;
         default:
             throw new Error("Unknown data type " + field.type);

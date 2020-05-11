@@ -30,7 +30,7 @@ export class Int64MessageField implements MessageField {
                 this.protoDataType = "Fixed64String";
                 break;
             case ProtoMessageFieldType.int64:
-                this.protoDataType = "Int64String";
+                this.protoDataType = "Int64";
                 break;
             case ProtoMessageFieldType.sfixed64:
                 this.protoDataType = "Sfixed64String";
@@ -87,6 +87,8 @@ export class Int64MessageField implements MessageField {
             return;
         } else if (this.isArray) {
             printer.add(`instance.${this.attributeName} = instance.${this.attributeName} || []`);
+        } else if (this.dataType === "number") {
+            printer.add(`instance.${this.attributeName} = instance.${this.attributeName} || 0`);
         } else {
             printer.add(`instance.${this.attributeName} = instance.${this.attributeName} || '0'`);
         }
