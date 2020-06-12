@@ -90,6 +90,10 @@ export class Proto {
         if (meta.proto === this) {
             return (thisProtoPackageName ? thisProtoPackageName + "." : "") + typeName;
         }
+        // because all enums are rendered without namespace see: projects/protoc-gen/src/lib/output/types/enum.ts
+        if (meta.enum) {
+            return `${this.getDependencyPackageName(meta.proto)}.${meta.enum.name}`;
+        }
 
         return `${this.getDependencyPackageName(meta.proto)}.${typeName}`;
     }
