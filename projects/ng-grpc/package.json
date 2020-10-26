@@ -25,9 +25,9 @@
   },
   "peerDependencies": {
     "@angular/core": "^9.1.0",
-    "grpc-web": "^1.0.7",
+    "grpc-web": "^1.2.1",
     "rxjs": "^6.5.4",
-    "google-protobuf": "^3.11.4"
+    "google-protobuf": "^3.13.0"
   },
   "devDependencies": {
     "jasmine": "3.5.0",
