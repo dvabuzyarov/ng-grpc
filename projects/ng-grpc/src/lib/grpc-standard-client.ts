@@ -27,7 +27,7 @@ export class GrpcStandardClient implements GrpcClient {
         this.client = new GrpcWebClientBase(this.settings);
     }
 
-    unary<Q extends GrpcMessage<QMessage>, S extends GrpcMessage<SMessage>, QMessage = unknown, SMessage = unknown>(
+    unary<Q extends GrpcMessage<ReqMessage>, S extends GrpcMessage<ResMessage>, ReqMessage = unknown, ResMessage = unknown>(
         path: string,
         req: Q,
         metadata: Metadata,
@@ -35,15 +35,17 @@ export class GrpcStandardClient implements GrpcClient {
         resclss: GrpcMessageClass<S>,
     ): Observable<GrpcEvent<S>> {
         return new Observable(obs => {
-            const stream = this.client.rpcCall(
+            const stream = this.client.rpcCall<Q, S>(
                 this.settings.host + path,
                 req,
                 metadata || {},
+                // todo: It takes MethodDescriptor, but the source code accepts either MethodInfo or MethodDescriptor.
+                // https://github.com/grpc/grpc-web/issues/981
                 new AbstractClientBase.MethodInfo(
                     resclss,
                     (request: Q) => reqclss.toBinary(request),
                     resclss.fromBinary
-                ),
+                ) as any,
                 () => null
             );
 
@@ -74,10 +76,12 @@ export class GrpcStandardClient implements GrpcClient {
                 this.settings.host + path,
                 req,
                 metadata || {},
+                // todo: It takes MethodDescriptor, but the source code accepts either MethodInfo or MethodDescriptor.
+                //  https://github.com/grpc/grpc-web/issues/981
                 new AbstractClientBase.MethodInfo(
                     resclss,
                     (request: Q) => reqclss.toBinary(request),
-                    resclss.fromBinary)
+                    resclss.fromBinary) as any
             );
 
             stream.on("status", status => obs.next(new GrpcStatusEvent(status.code, status.details, status.metadata)));
@@ -85,7 +89,8 @@ export class GrpcStandardClient implements GrpcClient {
                 obs.next(new GrpcStatusEvent(error.code, error.message, (error as any).metadata));
                 obs.complete();
             });
-            stream.on("data", data => obs.next(new GrpcDataEvent(data)));
+            //  https://github.com/grpc/grpc-web/issues/981 new GrpcDataEvent(data)
+            stream.on("data", data => obs.next(new GrpcDataEvent(data as any)));
             stream.on("end", () => obs.complete());
 
             return () => stream.cancel();
