@@ -34,7 +34,7 @@ export interface GrpcClientSettings {
     suppressCorsPreflight?: boolean;
 }
 
-export declare enum GrpcCallType {
+export enum GrpcCallType {
     unary = 0,
     serverStream = 1
 }
