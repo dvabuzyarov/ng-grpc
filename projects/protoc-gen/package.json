@@ -31,7 +31,6 @@
     "grpc-web": "*",
     "rxjs": "*",
     "google-protobuf": "*",
-    "ng-grpc": "",
     "winston": "*",
     "protoc-plugin": "*",
     "prettier": "*"
