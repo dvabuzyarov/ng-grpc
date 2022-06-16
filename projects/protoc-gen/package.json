@@ -27,19 +27,19 @@
     "url": "https://github.com/dvabuzyarov/ng-grpc/issues"
   },
   "peerDependencies": {
-    "@angular/core": "^9.1.0",
-    "grpc-web": "^1.2.1",
-    "rxjs": "^6.5.4",
-    "google-protobuf": "^3.13.0",
+    "@angular/core": "*",
+    "grpc-web": "*",
+    "rxjs": "*",
+    "google-protobuf": "*",
     "ng-grpc": "",
-    "winston": "3.2.1",
-    "protoc-plugin": "^0.0.6",
-    "prettier": "^2.0.2"
+    "winston": "*",
+    "protoc-plugin": "*",
+    "prettier": "*"
   },
   "devDependencies": {
     "jasmine": "3.5.0",
-    "moq.ts": "^5.0.5",
-    "ng-auto-moq": "^3.1.0",
+    "moq.ts": "^9.0.2",
+    "ng-auto-moq": "^5.2.0",
     "reflect-metadata": "^0.1.13",
     "@types/node": "^12.12.30"
   }
