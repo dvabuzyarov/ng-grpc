@@ -1,42 +1,64 @@
 import { InjectionToken, Injector, StaticProvider, Type } from "@angular/core";
-import { IMock, Mock } from "moq.ts";
-import { IMockedObject, IOptions, IParameter, MockFactory, moqInjectorProviders, resolveMock } from "ng-auto-moq";
+import { IMock, Mock, MoqAPI } from "moq.ts";
+import { IOptions, IParameter, MockFactory, moqInjectorProvidersFactory, OnlyStaticProvider } from "ng-auto-moq";
+import { InjectionFactory, TypeofInjectionFactory } from "@testdozer/ng-injector-types";
 
 export let injector: Injector;
 export let testedToken: Type<any>;
 
-export interface IMoqInjectorOptions<T> extends IOptions<T> {
+function nameof<T>(name: Extract<keyof T, string>): string {
+    return name;
+}
+
+export interface IMoqInjectorOptions<T> extends IOptions {
     providers?: StaticProvider[];
 }
 
-export function createMoqInjector<T>(constructor: Type<T>, options: IMoqInjectorOptions<T> = {}): Injector {
+export function createMoqInjector<T>(
+    constructor: Type<T>,
+    options: IMoqInjectorOptions<T> = {},
+    moqFactoryProviders: OnlyStaticProvider[] = []): Injector {
+    return createInjector(constructor, options, moqFactoryProviders);
+}
+
+function createInjector<T>(
+    constructor: Type<T>,
+    options: IMoqInjectorOptions<T> = {},
+    moqFactoryProviders: OnlyStaticProvider[] = []): Injector {
     testedToken = constructor;
-    options.mockFactory = options.mockFactory ? options.mockFactory : moqFactory;
+    const moqInjectorProviders = moqInjectorProvidersFactory({
+        providers: [
+            {provide: MockFactory, useValue: mockFactory, deps: []},
+            ...moqFactoryProviders
+        ]
+    });
     const customProvider = options.providers ? options.providers : [];
     const providers = [...moqInjectorProviders(constructor, options), ...customProvider];
     injector = Injector.create({providers});
     return injector;
 }
 
-export function resolve<T>(token: Type<T> | InjectionToken<T>): IMock<T> {
-    return resolveMock<T>(token, injector);
+export function resolveMock<T,
+    R = T extends InjectionFactory ? TypeofInjectionFactory<T> : T>(token: Type<T> | InjectionToken<T>): IMock<R> {
+    const object = injector.get(token) as unknown;
+    // todo: add "strictNullChecks": true to tsconfig.base.json
+    return object[MoqAPI];
 }
 
-export function get<T>(token: Type<T> | InjectionToken<T> = testedToken): T {
-    return injector.get(token);
+export function resolve<T,
+    R = T extends InjectionFactory ? TypeofInjectionFactory<T> : T>(token: Type<T> | InjectionToken<T> = testedToken): R {
+    return injector.get(token) as any;
 }
 
-function moqFactory(parameter: IParameter, defaultMockFactory: MockFactory): IMock<any & IMockedObject<any>> {
-    const mock = mockFactory(parameter);
-    mock.setup(instance => instance.__mock).returns(mock);
-    return mock;
-}
-
-function mockFactory(parameter: IParameter) {
-    if (typeof parameter.token === "function") {
-        return new Mock<any & IMockedObject<any>>({name: parameter.displayName, target: {}})
-            .prototypeof(parameter.token.prototype);
+function mockFactory({token, displayName}: IParameter) {
+    if (typeof token === "function") {
+        const propertyKey = nameof<InjectionFactory>("factory");
+        const injectionFactory = Reflect.has(token, propertyKey) || Reflect.has(token.prototype, propertyKey);
+        const target = injectionFactory ? () => undefined : {};
+        return new Mock<any>({name: displayName, target})
+            .prototypeof(token.prototype);
     }
 
-    return new Mock<any & IMockedObject<any>>({name: parameter.displayName});
+    return new Mock<any>({name: displayName});
 }
+

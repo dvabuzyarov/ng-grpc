@@ -30,9 +30,10 @@
     "google-protobuf": "*"
   },
   "devDependencies": {
-    "jasmine": "3.5.0",
-    "moq.ts": "^9.0.2",
-    "ng-auto-moq": "^5.2.0",
-    "reflect-metadata": "^0.1.13"
+    "jasmine": "*",
+    "moq.ts": "*",
+    "ng-auto-moq": "*",
+    "reflect-metadata": "*",
+    "@testdozer/ng-injector-types": "*"
   }
 }

@@ -37,10 +37,11 @@
     "prettier": "*"
   },
   "devDependencies": {
-    "jasmine": "3.5.0",
-    "moq.ts": "^9.0.2",
-    "ng-auto-moq": "^5.2.0",
-    "reflect-metadata": "^0.1.13",
-    "@types/node": "^12.12.30"
+    "jasmine": "*",
+    "moq.ts": "*",
+    "ng-auto-moq": "*",
+    "reflect-metadata": "*",
+    "@types/node": "*",
+    "@testdozer/ng-injector-types": "*"
   }
 }
