@@ -22,8 +22,7 @@ export class GrpcStandardClient implements GrpcClient {
     private client: GrpcWebClientBase;
 
     constructor(
-        private settings: GrpcClientSettings,
-    ) {
+        private settings: GrpcClientSettings) {
         this.client = new GrpcWebClientBase(this.settings);
     }
 

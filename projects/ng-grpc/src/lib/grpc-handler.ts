@@ -12,8 +12,9 @@ import { GrpcEvent } from "./grpc-event";
 export class GrpcHandler {
 
     constructor(
-        @Optional() @Inject(GRPC_INTERCEPTORS) private interceptors: GrpcInterceptor[]
-    ) {
+        @Optional()
+        @Inject(GRPC_INTERCEPTORS)
+        private interceptors: GrpcInterceptor[]) {
         this.interceptors = interceptors || [];
     }
 
