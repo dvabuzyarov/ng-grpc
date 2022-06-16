@@ -20,7 +20,7 @@ export class OneOf {
         private oneof: ProtoOneof,
     ) {
         this.attributeName = camelizeSafe(this.oneof.name);
-        this.enumName = classify(this.oneof.name) + "Case";
+        this.enumName = `${classify(this.oneof.name)  }Case`;
         this.index = message.oneofDeclList.indexOf(this.oneof);
         this.fields = this.message.fieldList.filter(f => f.oneofIndex === this.index);
     }

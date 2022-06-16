@@ -48,7 +48,7 @@ export class NumberMessageField implements MessageField {
                 this.protoDataType = "Uint32";
                 break;
             default:
-                throw new Error("Unknown number type " + this.messageField.type);
+                throw new Error(`Unknown number type ${  this.messageField.type}`);
         }
     }
 
@@ -56,6 +56,7 @@ export class NumberMessageField implements MessageField {
         const readerCall = `reader.read${this.protoDataType}()`;
 
         if (this.isArray) {
+            // eslint-disable-next-line max-len
             printer.add(`case ${this.messageField.number}: (instance.${this.attributeName} = instance.${this.attributeName} || []).push(${readerCall});`);
         } else {
             printer.add(`case ${this.messageField.number}: instance.${this.attributeName} = ${readerCall};`);

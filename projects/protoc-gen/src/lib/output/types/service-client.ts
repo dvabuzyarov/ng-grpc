@@ -29,7 +29,7 @@ export class ServiceClient {
             ExternalDependencies.GRPC_CLIENT_FACTORY,
         );
 
-        const serviceId = (this.proto.pb_package ? this.proto.pb_package + "." : "") + this.service.name;
+        const serviceId = (this.proto.pb_package ? `${this.proto.pb_package  }.` : "") + this.service.name;
 
         printer.add(`
       @Injectable({

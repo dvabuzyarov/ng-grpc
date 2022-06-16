@@ -1,21 +1,10 @@
-import { Injectable } from "@angular/core";
 import { AbstractClientBase, GrpcWebClientBase, Metadata } from "grpc-web";
 import { Observable } from "rxjs";
-import { GrpcClient, GrpcClientFactory, GrpcClientSettings } from "./grpc-client";
+import { GrpcClient, GrpcClientSettings } from "./grpc-client";
 import { GrpcMessage } from "./grpc-message";
 import { GrpcMessageClass } from "./grpc-message-class";
-import { GrpcDataEvent, GrpcEvent, GrpcStatusEvent } from "./grpc-event";
-
-@Injectable({
-    providedIn: "root"
-})
-export class GrpcStandardClientFactory implements GrpcClientFactory {
-
-    createClient(serviceId: string, settings: GrpcClientSettings) {
-        return new GrpcStandardClient({...settings});
-    }
-
-}
+import { GrpcEvent, GrpcStatusEvent } from "./grpc-event";
+import { GrpcDataEvent } from "./grpc-data-event";
 
 export class GrpcStandardClient implements GrpcClient {
 

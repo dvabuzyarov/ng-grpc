@@ -22,9 +22,8 @@ export function camelize(str: string) {
     }
 
     return str
-        .replace(STRING_CAMELIZE_REGEXP, (_match, _separator, chr) => {
-            return chr ? chr.toUpperCase() : "";
-        }).replace(/^([A-Z])/, (match) => match.toLowerCase());
+        .replace(STRING_CAMELIZE_REGEXP, (_match, _separator, chr) => chr ? chr.toUpperCase() : "")
+        .replace(/^([A-Z])/, (match) => match.toLowerCase());
 }
 
 export function classify(str: string) {
@@ -46,7 +45,7 @@ export function pascalize(str: string) {
 }
 
 export function camelizeSafe(name: string) {
-    const escaped = ["default", "var", "let", "const", "function", "class"].includes(name) ? "pb_" + name : name;
+    const escaped = ["default", "var", "let", "const", "function", "class"].includes(name) ? `pb_${  name}` : name;
 
     return camelize(escaped);
 }

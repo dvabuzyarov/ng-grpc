@@ -17,7 +17,7 @@ export function main() {
             const protocInput = r.toObject();
             const protos = protocInput.protoFileList.map(proto => new Proto(proto));
 
-            Services.Config = Config.fromParameter(protocInput.parameter);
+            Services.Config = Config.FromParameter(protocInput.parameter);
             Services.Logger = new Logger();
 
             if (Services.Config.debug) {
@@ -57,14 +57,14 @@ export function main() {
 
                     configFile.print(configPrinter);
 
-                    files.push({name: basename + "conf.ts", content: configPrinter.finalize()});
+                    files.push({name: `${basename  }conf.ts`, content: configPrinter.finalize()});
 
                     const pbscPrinter = new Printer();
                     const pbscFile = new PbscFile(proto);
 
                     pbscFile.print(pbscPrinter);
 
-                    files.push({name: basename + "sc.ts", content: pbscPrinter.finalize()});
+                    files.push({name: `${basename  }sc.ts`, content: pbscPrinter.finalize()});
 
                     // if (Services.Config.worker) {
                     //     const pbwscPrinter = new Printer();
@@ -81,7 +81,7 @@ export function main() {
 
                 pbFile.print(pbPrinter);
 
-                files.push({name: basename + ".ts", content: pbPrinter.finalize()});
+                files.push({name: `${basename  }.ts`, content: pbPrinter.finalize()});
 
                 return [...res, ...files];
             }, [] as any[]);

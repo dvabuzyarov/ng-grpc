@@ -61,7 +61,7 @@ export class Message {
                     case ProtoMessageFieldType.uint64:
                         return new Number64MessageField(this.proto, this.message, field, oneOf);
                     default:
-                        throw new Error("Unknown data type " + field.type);
+                        throw new Error(`Unknown data type ${  field.type}`);
                 }
             }
         });

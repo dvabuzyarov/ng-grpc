@@ -47,6 +47,7 @@ export class MessageMessageField implements MessageField {
     }
 
     printToBinaryWriter(printer: Printer) {
+        /* eslint-disable max-len */
         if (this.isArray) {
             printer.add(`if (instance.${this.attributeName} && instance.${this.attributeName}.length) {
         writer.writeRepeatedMessage(${this.messageField.number}, instance.${this.attributeName} as any, ${this.messageClassName}.toBinaryWriter);
@@ -56,6 +57,7 @@ export class MessageMessageField implements MessageField {
         writer.writeMessage(${this.messageField.number}, instance.${this.attributeName} as any, ${this.messageClassName}.toBinaryWriter);
       }`);
         }
+        /* eslint-enable max-len */
     }
 
     printPrivateAttribute(printer: Printer) {
@@ -66,6 +68,7 @@ export class MessageMessageField implements MessageField {
         if (this.isArray) {
             printer.add(`this.${this.attributeName} = (value.${this.attributeName} || []).map(m => new ${this.messageClassName}(m));`);
         } else {
+            // eslint-disable-next-line max-len
             printer.add(`this.${this.attributeName} = value.${this.attributeName} ? new ${this.messageClassName}(value.${this.attributeName}) : undefined;`);
         }
     }

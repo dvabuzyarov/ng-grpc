@@ -29,6 +29,7 @@ export class EnumMessageField implements MessageField {
         const readerCall = "reader.readEnum()";
 
         if (this.isArray) {
+            // eslint-disable-next-line max-len
             printer.add(`case ${this.messageField.number}: (instance.${this.attributeName} = instance.${this.attributeName} || []).push(${readerCall});`);
         } else {
             printer.add(`case ${this.messageField.number}: instance.${this.attributeName} = ${readerCall};`);

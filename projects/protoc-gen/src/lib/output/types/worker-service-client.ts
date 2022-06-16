@@ -17,8 +17,8 @@ export class WorkerServiceClient {
             // ExternalDependencies.GrpcWorkerServiceClientDef,
         );
 
-        const serviceName = (this.proto.pb_package ? this.proto.pb_package + "." : "") + this.service.name;
-        const serviceId = (this.proto.pb_package ? this.proto.pb_package + "." : "") + this.service.name;
+        const serviceName = (this.proto.pb_package ? `${this.proto.pb_package  }.` : "") + this.service.name;
+        const serviceId = (this.proto.pb_package ? `${this.proto.pb_package  }.` : "") + this.service.name;
 
         const methods = this.service.methodList.map(method => {
             const callType = method.serverStreaming ? "serverStream" : "unary";

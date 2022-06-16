@@ -1,12 +1,12 @@
 import { Proto } from "../../../input/proto";
 import { ProtoMessage } from "../../../input/proto-message";
 import { ProtoMessageField } from "../../../input/proto-message-field";
-import { ProtoMessageFieldCardinality } from "../../../input/types";
 import { camelizeSafe } from "../../../utils";
 import { getDataType } from "../../misc/helpers";
 import { Printer } from "../../misc/printer";
 import { MessageField } from "../message-field";
 import { OneOf } from "../oneof";
+import { ProtoMessageFieldCardinality } from "../../../input/types";
 
 export class BytesMessageField implements MessageField {
 
@@ -29,6 +29,7 @@ export class BytesMessageField implements MessageField {
         const readerCall = "reader.readBytes()";
 
         if (this.isArray) {
+            // eslint-disable-next-line max-len
             printer.add(`case ${this.messageField.number}: (instance.${this.attributeName} = instance.${this.attributeName} || []).push(${readerCall});`);
         } else {
             printer.add(`case ${this.messageField.number}: instance.${this.attributeName} = ${readerCall};`);

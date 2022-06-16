@@ -28,10 +28,12 @@ export class StringMessageField implements MessageField {
     printFromBinaryReader(printer: Printer) {
         const readerCall = "reader.readString()";
 
+        const fieldNumber = this.messageField.number;
         if (this.isArray) {
-            printer.add(`case ${this.messageField.number}: (instance.${this.attributeName} = instance.${this.attributeName} || []).push(${readerCall});`);
+            // eslint-disable-next-line max-len
+            printer.add(`case ${fieldNumber}: (instance.${this.attributeName} = instance.${this.attributeName} || []).push(${readerCall});`);
         } else {
-            printer.add(`case ${this.messageField.number}: instance.${this.attributeName} = ${readerCall};`);
+            printer.add(`case ${fieldNumber}: instance.${this.attributeName} = ${readerCall};`);
         }
 
         printer.add("break;");

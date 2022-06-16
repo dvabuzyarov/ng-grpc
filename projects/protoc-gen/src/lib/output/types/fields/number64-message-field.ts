@@ -42,7 +42,7 @@ export class Int64MessageField implements MessageField {
                 this.protoDataType = "Uint64String";
                 break;
             default:
-                throw new Error("Unknown int64 type " + this.messageField.type);
+                throw new Error(`Unknown int64 type ${  this.messageField.type}`);
         }
     }
 
@@ -50,6 +50,7 @@ export class Int64MessageField implements MessageField {
         const readerCall = `reader.read${this.protoDataType}()`;
 
         if (this.isArray) {
+            // eslint-disable-next-line max-len
             printer.add(`case ${this.messageField.number}: (instance.${this.attributeName} = instance.${this.attributeName} || []).push(${readerCall});`);
         } else {
             printer.add(`case ${this.messageField.number}: instance.${this.attributeName} = ${readerCall};`);

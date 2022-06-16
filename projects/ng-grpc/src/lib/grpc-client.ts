@@ -34,9 +34,9 @@ export interface GrpcClientSettings {
     suppressCorsPreflight?: boolean;
 }
 
-export enum GrpcCallType {
-    unary,
-    serverStream,
+export declare enum GrpcCallType {
+    unary = 0,
+    serverStream = 1
 }
 
 export interface GrpcRequest<Q extends GrpcMessage<QMessage>,

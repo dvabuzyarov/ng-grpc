@@ -27,10 +27,12 @@ export function getMapKeyValueFields(proto: Proto, field: ProtoMessageField) {
     return [key, value];
 }
 
+// eslint-disable-next-line complexity
 export function getDataType(proto: Proto, field: ProtoMessageField, useInterfaceNotation = false) {
     if (isFieldMap(proto, field)) {
         const [key, value] = getMapKeyValueFields(proto, field);
 
+        // eslint-disable-next-line max-len
         return `{ [prop: ${key.type === ProtoMessageFieldType.string ? "string" : "number"}]: ${getDataType(proto, value, useInterfaceNotation)}; }`;
     }
 
@@ -58,11 +60,11 @@ export function getDataType(proto: Proto, field: ProtoMessageField, useInterface
         case ProtoMessageFieldType.sfixed64:
         case ProtoMessageFieldType.sint64:
         case ProtoMessageFieldType.uint64:
-            return "string" + suffix;
+            return `string${suffix}`;
         case ProtoMessageFieldType.bool:
-            return "boolean" + suffix;
+            return `boolean${suffix}`;
         case ProtoMessageFieldType.bytes:
-            return "Uint8Array" + suffix;
+            return `Uint8Array${suffix}`;
         case ProtoMessageFieldType.double:
         case ProtoMessageFieldType.fixed32:
         case ProtoMessageFieldType.float:
@@ -71,8 +73,8 @@ export function getDataType(proto: Proto, field: ProtoMessageField, useInterface
         case ProtoMessageFieldType.sint32:
         case ProtoMessageFieldType.uint32:
         case ProtoMessageFieldType.int64:
-            return "number" + suffix;
+            return `number${suffix}`;
         default:
-            throw new Error("Unknown data type " + field.type);
+            throw new Error(`Unknown data type ${field.type}`);
     }
 }

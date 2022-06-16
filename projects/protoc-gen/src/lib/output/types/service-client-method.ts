@@ -23,14 +23,15 @@ export class ServiceClientMethod {
             ExternalDependencies.Observable,
         );
 
-        const serviceUrlPrefix = this.proto.pb_package ? this.proto.pb_package + "." : "";
+        const serviceUrlPrefix = this.proto.pb_package ? `${this.proto.pb_package  }.` : "";
         const inputType = this.proto.getRelativeTypeName(this.serviceMethod.inputType, "thisProto");
         const outputType = this.proto.getRelativeTypeName(this.serviceMethod.outputType, "thisProto");
         const messageOutputType = this.getInterfaceNotation(this.proto.getRelativeTypeName(this.serviceMethod.outputType, "thisProto"));
 
         const jsdocMessagesOnly = new JSDoc();
 
-        jsdocMessagesOnly.setDescription(`${this.serviceMethod.serverStreaming ? "Server streaming" : "Unary"} RPC. Emits messages and throws errors on non-zero status codes`);
+        const streamingMethod = this.serviceMethod.serverStreaming ? "Server streaming" : "Unary";
+        jsdocMessagesOnly.setDescription(`${streamingMethod} RPC. Emits messages and throws errors on non-zero status codes`);
         jsdocMessagesOnly.addParam({type: inputType, name: "request", description: "Request message"});
         jsdocMessagesOnly.addParam({type: "Metadata", name: "metadata", description: "Additional data"});
         jsdocMessagesOnly.setReturn(`Observable<${messageOutputType}>`);
@@ -38,20 +39,22 @@ export class ServiceClientMethod {
 
         const jsdocEvents = new JSDoc();
 
-        jsdocEvents.setDescription(`${this.serviceMethod.serverStreaming ? "Server streaming" : "Unary"} RPC. Emits data and status events; does not throw errors by design`);
+        jsdocEvents.setDescription(`${streamingMethod} RPC. Emits data and status events; does not throw errors by design`);
         jsdocEvents.addParam({type: inputType, name: "request", description: "Request message"});
         jsdocEvents.addParam({type: "Metadata", name: "metadata", description: "Additional data"});
         jsdocEvents.setReturn(`Observable<GrpcEvent<${outputType}>>`);
         jsdocEvents.setDeprecation(!!this.serviceMethod.options && this.serviceMethod.options.deprecated);
 
+        const returnType = `Observable<${messageOutputType}>`;
+        const eventReturnType = `Observable<GrpcEvent<${outputType}>|${messageOutputType}>`;
         printer.add(`
       ${jsdocMessagesOnly.toString()}
-      ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<${messageOutputType}> {
+      ${camelizeSafe(this.serviceMethod.name)}(requestData: ${inputType}, requestMetadata: Metadata = {}): ${returnType} {
         return this.${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData, requestMetadata) as any;
       }
 
       ${jsdocEvents.toString()}
-      ${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData: ${inputType}, requestMetadata: Metadata = {}): Observable<GrpcEvent<${outputType}>|${messageOutputType}> {
+      ${camelizeSafe(this.serviceMethod.name)}$eventStream(requestData: ${inputType}, requestMetadata: Metadata = {}): ${eventReturnType} {
         return this.handler.handle({
           type: GrpcCallType.${this.serviceMethod.serverStreaming ? "serverStream" : "unary"},
           client: this.client,

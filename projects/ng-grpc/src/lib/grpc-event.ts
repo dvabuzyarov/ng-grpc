@@ -1,19 +1,12 @@
 import { Status } from "grpc-web";
 import { GrpcMessage } from "./grpc-message";
-
-export class GrpcDataEvent<T extends GrpcMessage<TMessage>, TMessage = unknown> {
-    constructor(
-        public data: T
-    ) {
-    }
-}
+import { GrpcDataEvent } from "./grpc-data-event";
 
 export class GrpcStatusEvent implements Status {
     constructor(
         public code: number,
         public details: string,
-        public metadata: { [prop: string]: string; },
-    ) {
+        public metadata: { [prop: string]: string }) {
     }
 }
 

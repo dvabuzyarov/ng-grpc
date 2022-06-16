@@ -32,7 +32,7 @@ export class Proto {
 
     constructor(value: Proto) {
         this.name = value.name;
-        this.pb_package = value.pb_package; // eslint-disable-line @typescript-eslint/camelcase
+        this.pb_package = value.pb_package;
         this.dependencyList = value.dependencyList || [];
         this.publicDependencyList = value.publicDependencyList;
         this.weakDependencyList = value.weakDependencyList;
@@ -68,7 +68,7 @@ export class Proto {
         }
 
         Services.Logger.debug(`Cannot find type ${pbType} in proto ${this.name}`);
-        throw new Error("Error finding " + pbType);
+        throw new Error(`Error finding ${  pbType}`);
     }
 
     getDependencyPackageName(proto: Proto) {
@@ -88,7 +88,7 @@ export class Proto {
         const [, , /* packageName */, typeName] = pbType.match(/^\.(([a-z0-9.]*)\.)?([A-Za-z0-9.]+$)/) as RegExpMatchArray;
 
         if (meta.proto === this) {
-            return (thisProtoPackageName ? thisProtoPackageName + "." : "") + typeName;
+            return (thisProtoPackageName ? `${thisProtoPackageName  }.` : "") + typeName;
         }
         // because all enums are rendered without namespace see: projects/protoc-gen/src/lib/output/types/enum.ts
         if (meta.enum) {
@@ -101,6 +101,7 @@ export class Proto {
     getImportedDependencies() {
         const root = Array(this.name.split("/").length - 1).fill("..").join("/");
 
+        // eslint-disable-next-line max-len
         return this.resolved.dependencies.map(pp => `import * as ${this.getDependencyPackageName(pp)} from '${root || "."}/${pp.getGeneratedFileBaseName()}';`).join("\n");
     }
 
@@ -129,8 +130,8 @@ export class Proto {
             });
         };
 
-        indexMessages(this.pb_package ? "." + this.pb_package : "", this.messageTypeList);
-        indexEnums(this.pb_package ? "." + this.pb_package : "", this.enumTypeList);
+        indexMessages(this.pb_package ? `.${  this.pb_package}` : "", this.messageTypeList);
+        indexEnums(this.pb_package ? `.${  this.pb_package}` : "", this.enumTypeList);
     }
 
 }
