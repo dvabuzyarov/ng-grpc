@@ -36,6 +36,9 @@
     "protoc-plugin": "*",
     "prettier": "*"
   },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "devDependencies": {
     "jasmine": "*",
     "moq.ts": "*",
